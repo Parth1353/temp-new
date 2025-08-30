@@ -1,7 +1,7 @@
-import { Schema, model, models, Document } from "mongoose";
+import { Schema, model, Document } from 'mongoose';
 
 export interface ILog extends Document {
-  action: "REQUEST" | "ALLOCATE" | "ROLLBACK";
+  action: 'REQUEST' | 'ALLOCATE' | 'ROLLBACK';
   patientName: string;
   details: string;
   timestamp: Date;
@@ -10,7 +10,7 @@ export interface ILog extends Document {
 const LogSchema = new Schema<ILog>({
   action: {
     type: String,
-    enum: ["REQUEST", "ALLOCATE", "ROLLBACK"],
+    enum: ['REQUEST', 'ALLOCATE', 'ROLLBACK'],
     required: true,
   },
   patientName: { type: String, required: true },
@@ -18,4 +18,4 @@ const LogSchema = new Schema<ILog>({
   timestamp: { type: Date, default: Date.now },
 });
 
-export default models.Log ? models.Log : model<ILog>("Log", LogSchema);
+export default model<ILog>('Log', LogSchema);

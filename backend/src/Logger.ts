@@ -1,12 +1,14 @@
 // Logger.ts
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-import Log from "./models/Log.js";
+import Log from './models/Log';
 
 export async function addLog(
-  action: "REQUEST" | "ALLOCATE" | "ROLLBACK",
+  action: 'REQUEST' | 'ALLOCATE' | 'ROLLBACK',
   patientName: string,
   details: string
 ) {
-  // TODO: Add error handling, transaction support
-  await (Log as any).create({ action, patientName, details });
+  try {
+    await Log.create({ action, patientName, details });
+  } catch (error) {
+    console.error('Failed to create log:', error);
+  }
 }
